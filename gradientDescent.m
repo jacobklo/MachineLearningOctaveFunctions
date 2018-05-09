@@ -1,12 +1,17 @@
-function [ thetaV, J_history] = gradientDescent(XV, YV, thetaV, alpha, numIteration)
-  m = size(XV)(1);
-  J_history = zeros(numIteration, 1);
+function [ thetaV, J_History ] = gradientDescent(XV, yV, thetaV, alpha, numIteration)
+  m = length(yV);
+  J_History = zeros(numIteration, 1);
 
-  for i = 1: numIteration
-    meansquareErrorV = XV * thetaV - YV;
+  for iter = 1: numIteration
+    meansquareErrorV = XV * thetaV - yV;
     current = XV' * meansquareErrorV * alpha / m;
     thetaV = thetaV - current;
-    J_history(i) = costFunction(XV, YV, thetaV);
+    J_History(iter) = costFunction(XV, yV, thetaV);
+    if (mod(iter,10) == 0)
+     disp(thetaV);
+    endif
   end
 
   return;
+
+endfunction
